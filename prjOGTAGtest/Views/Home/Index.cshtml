@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<meta charset="utf-8" />
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@* <a href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent("https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex")) ));' title='分享給 LINE 好友' >
+    <img alt='分享給LINE好友 !' height='40' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8QWmCV_sMkMG1yVSekImF2X1XTtstWPQ7rlrJIPDhsyScT4dA9XAJ2Pjrd6sjxWN9sZJLjQ2L35b_w8G4oBfqyrFOW_FZuGPFeZA8uqd7L2v_EqJWDZ3HF26HziD4VPpOUJGnCCzFW0Y/s1600/168x40.png' width='168' />
+    </a> *@
+
+    <br/>
+<a href="#" onclick="shareToLine(); return false;" title="分享給 LINE 好友"><p>line分享</p></a>
+<br/>
+<a href="#" onclick="share(); return false;" title="分享給 LINE 好友"><p>複製連結+line</p></a>
+
+
+<script>
+    function shareToLine() {
+        var shareText = encodeURIComponent('最好的禮物，送給最值得的你!分享大冰美式買12送12給你，趕快點開下方連結去兌換吧!');
+        var shareUrl = encodeURIComponent('https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex');
+        window.open('https://lineit.line.me/share/ui?url=' + shareUrl + '&text=' + shareText);
+    }
+
+    function share() {
+        if (navigator.share) {
+            navigator.share({
+                title: '分享標題',
+                text: '最好的禮物，送給最值得的你!分享大冰美式買12送12給你，趕快點開下方連結去兌換吧!',
+                url: 'https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex'
+            })
+                .then(() => console.log('分享成功'))
+                .catch((error) => console.log('分享失敗', error));
+        } else {
+            // 如果不支援 Web Share API，則回退到您的 JavaScript 邏輯
+            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent('https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex') + '&text=' + encodeURIComponent('您希望預設的分享文案'));
+        }
+    }
+    function showShareOptions() {
+        var shareUrl = 'https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex';
+        var shareText = '最好的禮物，送給最值得的你!分享大冰美式買12送12給你，趕快點開下方連結去兌換吧!';
+
+        var choice = confirm("您想要複製連結還是使用 LINE 分享？\n\n點擊確定複製連結，點擊取消使用 LINE 分享。");
+
+        if (choice == true) {
+            // 複製連結
+            copyToClipboard(shareUrl);
+            alert("連結已複製到剪貼板！");
+        } else {
+            // 使用 LINE 分享
+            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareText));
+        }
+    }
+
+    function copyToClipboard(text) {
+        var tempInput = document.createElement("input");
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+    }
+</script>
