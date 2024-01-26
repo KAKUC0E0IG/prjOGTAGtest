@@ -13,34 +13,34 @@
     </a> *@
 
     <br/>
-<a href="#" onclick="shareToLine(); return false;" title="分享給 LINE 好友"><p>line分享</p></a>
+<a href="#" onclick="shareToLine(`@Model.分享連結`); return false;" title="分享給 LINE 好友"><p>line分享</p></a>
 <br/>
-<a href="#" onclick="share(); return false;" title="分享給 LINE 好友"><p>複製連結+line</p></a>
+<a href="#" onclick="share(`@Model.分享連結`); return false;" title="分享給 LINE 好友"><p>複製連結+line</p></a>
 <input type="hidden" id="productname" value="@Model.商品名" />
 
 <script>
         const productname = document.getElementById("productname").value
-    const link = document.getElementById("link").value
+    //const link = document.getElementById("link").value
 
-    function shareToLine() {
+    function shareToLine(link) {
         var shareText = encodeURIComponent(`最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`);
-        var shareUrl = encodeURIComponent(`@Model.分享連結`)
+        var shareUrl = encodeURIComponent(link)
         window.open('https://lineit.line.me/share/ui?url=' + shareUrl + '&text=' + shareText);
     }
 
-    function share() {
+    function share(link) {
 
         if (navigator.share) {
             navigator.share({
                 title: '分享標題',
                 text: `最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`,
-                url: `@Model.分享連結`
+                url: link
             })
                 .then(() => console.log('分享成功'))
                 .catch((error) => console.log('分享失敗', error));
         } else {
             // 如果不支援 Web Share API，則回退到您的 JavaScript 邏輯
-            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(`@Model.分享連結`) + '&text=' + encodeURIComponent(`最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`));
+            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(`最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`));
         }
     }
     // function showShareOptions() {
