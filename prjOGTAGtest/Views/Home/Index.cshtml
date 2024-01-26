@@ -1,4 +1,5 @@
-﻿@{
+﻿@model prjOGTAGtest.Models.CIndex
+@{
     ViewData["Title"] = "Home Page";
 }
 <meta charset="utf-8" />
@@ -15,51 +16,55 @@
 <a href="#" onclick="shareToLine(); return false;" title="分享給 LINE 好友"><p>line分享</p></a>
 <br/>
 <a href="#" onclick="share(); return false;" title="分享給 LINE 好友"><p>複製連結+line</p></a>
-
+<input type="hidden" id="productname" value="@Model.商品名" />
 
 <script>
+        const productname = document.getElementById("productname").value
+    const link = document.getElementById("link").value
+
     function shareToLine() {
-        var shareText = encodeURIComponent('最好的禮物，送給最值得的你!分享大冰美式買12送12給你，趕快點開下方連結去兌換吧!');
-        var shareUrl = encodeURIComponent('https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex');
+        var shareText = encodeURIComponent(`最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`);
+        var shareUrl = encodeURIComponent(`@Model.分享連結`)
         window.open('https://lineit.line.me/share/ui?url=' + shareUrl + '&text=' + shareText);
     }
 
     function share() {
+
         if (navigator.share) {
             navigator.share({
                 title: '分享標題',
-                text: '最好的禮物，送給最值得的你!分享大冰美式買12送12給你，趕快點開下方連結去兌換吧!',
-                url: 'https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex'
+                text: `最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`,
+                url: `@Model.分享連結`
             })
                 .then(() => console.log('分享成功'))
                 .catch((error) => console.log('分享失敗', error));
         } else {
             // 如果不支援 Web Share API，則回退到您的 JavaScript 邏輯
-            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent('https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex') + '&text=' + encodeURIComponent('您希望預設的分享文案'));
+            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(`@Model.分享連結`) + '&text=' + encodeURIComponent(`最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`));
         }
     }
-    function showShareOptions() {
-        var shareUrl = 'https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex';
-        var shareText = '最好的禮物，送給最值得的你!分享大冰美式買12送12給你，趕快點開下方連結去兌換吧!';
+    // function showShareOptions() {
+    //     var shareUrl = link;
+    //     var shareText = '最好的禮物，送給最值得的你!分享' + productname + '給你，趕快點開下方連結去兌換吧!';
 
-        var choice = confirm("您想要複製連結還是使用 LINE 分享？\n\n點擊確定複製連結，點擊取消使用 LINE 分享。");
+    //     var choice = confirm("您想要複製連結還是使用 LINE 分享？\n\n點擊確定複製連結，點擊取消使用 LINE 分享。");
 
-        if (choice == true) {
-            // 複製連結
-            copyToClipboard(shareUrl);
-            alert("連結已複製到剪貼板！");
-        } else {
-            // 使用 LINE 分享
-            window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareText));
-        }
-    }
+    //     if (choice == true) {
+    //         // 複製連結
+    //         copyToClipboard(shareUrl);
+    //         alert("連結已複製到剪貼板！");
+    //     } else {
+    //         // 使用 LINE 分享
+    //         window.open('https://lineit.line.me/share/ui?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(shareText));
+    //     }
+    // }
 
-    function copyToClipboard(text) {
-        var tempInput = document.createElement("input");
-        tempInput.value = text;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-    }
+    // function copyToClipboard(text) {
+    //     var tempInput = document.createElement("input");
+    //     tempInput.value = text;
+    //     document.body.appendChild(tempInput);
+    //     tempInput.select();
+    //     document.execCommand("copy");
+    //     document.body.removeChild(tempInput);
+    // }
 </script>

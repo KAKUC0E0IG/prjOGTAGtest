@@ -15,15 +15,22 @@ namespace prjOGTAGtest.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            CIndex cIndex = new CIndex()
+            {
+                商品名 = "大冰美式買12送12",
+                賀卡圖 = "https://prjdbgamingformshow20231219140402.azurewebsites.net/AD/b84fc620-3824-45bb-ae2f-a7820b114a17.jpg",
+                分享連結 = "https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex"
+            };
+            return View(cIndex);
         }
 
         public IActionResult GiftIndex()
         {
             CIndex cIndex = new CIndex()
             {
-                商品名 = "咖啡",
-                賀卡圖 = "https://prjdbgamingformshow20231219140402.azurewebsites.net/images/shop/633234ed-a8d6-4cd0-80d6-07a5e4363d5b.jpg"
+                商品名 = "大冰美式買12送12",
+                賀卡圖 = "https://prjdbgamingformshow20231219140402.azurewebsites.net/AD/b84fc620-3824-45bb-ae2f-a7820b114a17.jpg",
+                分享連結 = "https://9bdb-219-91-55-83.ngrok-free.app/home/giftindex"
             };
             return View(cIndex);
         }

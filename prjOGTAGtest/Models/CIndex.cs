@@ -4,5 +4,7 @@
     {
         public string 商品名 { get; set; }
         public string 賀卡圖 { get; set; }
+
+        public string 分享連結 { get; set; }
     }
 }
