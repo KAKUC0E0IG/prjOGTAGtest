@@ -23,7 +23,7 @@
     //const link = document.getElementById("link").value
 
     function shareToLine(link) {
-        var shareText = encodeURIComponent(`最好的禮物，送給最值得的你!分享` + productname + ` 給你，趕快點開下方連結去兌換吧!`);
+        var shareText = encodeURIComponent(`分享` + productname );
         var shareUrl = encodeURIComponent(link)
         window.open('https://lineit.line.me/share/ui?url=' + shareUrl + '&text=' + shareText);
     }
